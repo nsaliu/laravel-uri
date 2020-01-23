@@ -2,6 +2,7 @@
 
 namespace Nsaliu\Uri;
 
+use Nsaliu\Uri\Exceptions\HostIsEmptyException;
 use Nsaliu\Uri\Exceptions\InvalidUriException;
 use Nsaliu\Uri\Exceptions\PortOutOfRangeException;
 use Nsaliu\Uri\Exceptions\QueryCannotContainFragmentException;
@@ -488,17 +489,17 @@ class Uri
     }
 
     /**
-     * @param string $uri
-     * @param CurlWrapper $curlWrapper
      * @return bool
-     * @throws InvalidUriException
-     * @throws QueryCannotContainFragmentException
      * @throws Exceptions\CurlExtensionNotLoaded
+     * @throws HostIsEmptyException
      */
-    public function hostIsReachable(string $uri, CurlWrapper $curlWrapper): bool
+    public function hostIsReachable(): bool
     {
-        $this->createFromString($uri);
+        if ($this->host === '') {
+            throw new HostIsEmptyException();
+        }
 
+        $curlWrapper = new CurlWrapper();
         return $curlWrapper->getReturnCode($this->toString());
     }
 

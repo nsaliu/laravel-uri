@@ -3,6 +3,7 @@
 namespace Nsaliu\Uri\Tests;
 
 use Nsaliu\Uri\CurlWrapper;
+use Nsaliu\Uri\Exceptions\HostIsEmptyException;
 use Nsaliu\Uri\Exceptions\InvalidUriException;
 use Nsaliu\Uri\Exceptions\QueryCannotContainFragmentException;
 use Nsaliu\Uri\Exceptions\QueryKeyAlreadyExistsException;
@@ -426,13 +427,16 @@ class UriTest extends TestCase
 
     public function testHostIsReachable()
     {
-        $curlWrapperMock = $this->createMock(CurlWrapper::class);
-        $curlWrapperMock
-            ->expects($this->once())
-            ->method('getReturnCode')
-            ->willReturn(200);
+        $this->sut->createFromString('https://github.com');
 
-        $this->assertTrue($this->sut->hostIsReachable('https://github.com', $curlWrapperMock));
+        $this->assertTrue($this->sut->hostIsReachable());
+    }
+
+    public function testHostIsReachableMustRiseHostIsEmptyException()
+    {
+        $this->expectException(HostIsEmptyException::class);
+
+        $this->assertTrue($this->sut->hostIsReachable());
     }
 
     public function testEqualsReturnTrue()

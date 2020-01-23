@@ -25,6 +25,62 @@ $uri = new Uri();
 $uri->createFromString('https://test.test');
 ```
 
+### toString
+
+Return the string representation of the URI instance. 
+
+```
+$uri = new Uri();
+$uri->createFromString('https://test.test');
+$uri->toString();
+```
+
+### hostIsReachable
+
+Check with a GET call if the host returns an HTTP status code equals to 200. 
+
+```
+$uri = new Uri();
+$uri->createFromString('https://test.test');
+$uri->hostIsReachable();
+```
+
+### equals
+
+Check if a string equals to the URI instance. 
+
+```
+$uri = new Uri();
+$uri->createFromString('https://test.test');
+$uri->equals('https://test.test');
+```
+
+### getComponents
+
+Gets all the URIs components if presents.
+
+```
+$uri = new Uri();
+$uri->createFromString('https://fakeuser:fakepass@test.test:443/path1/path2/page.html?key1=value1&key2=value2#fragment');
+$uri->getComponents();
+```
+
+Return:
+```
+[
+  'scheme' => 'https'
+  'host' => 'test.test'
+  'port' => 443
+  'user' => 'fakeuser'
+  'pass' => 'fakepass'
+  'path' => '/path1/path2/page.html'
+  'query' => 'key1=value1&key2=value2'
+  'fragment' => 'fragment'
+]
+```
+
+## Getters
+
 ### getScheme
 
 Return the scheme part of the URI.
@@ -265,6 +321,111 @@ $uri->getFragment();
 ```
 
 Return:
-- if the path and query exists return ```/path1/path2/page.html?key1=value1&key2=value2```.
-- if the path exists and query not exists return ```/path1/path2/page.html```.
-- if the path not exists and query too return an ```empty string```.
+- if the fragment is present return ```fragment-1```.
+- if the fragment is not present return an ```empty string```.
+
+## Setters
+
+### setScheme
+
+Set the scheme of the URI.
+
+```
+$uri = new Uri();
+$uri->setScheme();
+```
+### setUsername
+
+Set the user part of the URI.
+
+```
+$uri = new Uri();
+$uri->setUsername();
+```
+### setPassword
+
+Set the password part of the URI.
+
+```
+$uri = new Uri();
+$uri->setPassword();
+```
+
+### setUserInfo
+
+Set the user and password part of the URI.
+
+```
+$uri = new Uri();
+$uri->setUserInfo('username'); // without password
+$uri->setUserInfo('username', 'password'); // or with password
+```
+### setHost
+
+Set the host part of the URI.
+
+```
+$uri = new Uri();
+$uri->setHost('test.test');
+```
+### setPort
+
+Set the port part of the URI.
+
+```
+$uri = new Uri();
+$uri->setPort(80);
+```
+
+### setPath
+
+Set the path part of the URI.
+
+```
+$uri = new Uri();
+$uri->setPath('path1/path2/page.html');
+```
+### setQuery
+
+Set the query part of the URI.
+
+```
+$uri = new Uri();
+$uri->setQuery('key1&value1&key2=value2');
+```
+
+### setQueryArray
+
+Set the query part of the URI with an array.
+
+```
+$uri = new Uri();
+$uri->setQueryArray(['key1' => 'value1', 'key2' => 'value2']);
+```
+
+### addQuery
+
+Add a query part to the URI.
+
+```
+$uri = new Uri();
+$uri->addQuery('key3', 'value3');
+```
+
+### changeQuery
+
+Change a query part of the URI.
+
+```
+$uri = new Uri();
+$uri->changeQuery('key1', 'value-changed');
+```
+
+### setFragment
+
+Set the fragment part of the URI.
+
+```
+$uri = new Uri();
+$uri->setFragment('fragment-2');
+```
