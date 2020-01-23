@@ -1,0 +1,38 @@
+{
+    "name": "nsaliu/laravel-uri",
+    "description": "A URI component for Laravel framework",
+    "homepage": "https://github.com/nsaliu/laravel-uri",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicola Saliu",
+            "email": "nicola.saliu@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nsaliu\\Uri\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nsaliu\\Uri\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nsaliu\\Uri\\UriComponentServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
