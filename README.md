@@ -2,6 +2,7 @@
 
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![CircleCI](https://img.shields.io/circleci/build/gh/nsaliu/laravel-uri/master?style=flat-square)](https://circleci.com/gh/nsaliu/laravel-uri/tree/master)
+[![StyleCI](https://github.styleci.io/repos/235837455/shield?branch=master)](https://github.styleci.io/repos/235837455)
 
 A simple and useful URI package for Laravel framework. 
 
