@@ -2,7 +2,6 @@
 
 namespace Nsaliu\Uri\Tests;
 
-use Nsaliu\Uri\CurlWrapper;
 use Nsaliu\Uri\Exceptions\HostIsEmptyException;
 use Nsaliu\Uri\Exceptions\InvalidUriException;
 use Nsaliu\Uri\Exceptions\QueryCannotContainFragmentException;
@@ -418,7 +417,7 @@ class UriTest extends TestCase
 
         $this->assertEquals(
             'https://username:password@test.test:80/en-us/path1/path2/page.html?arg1=1&arg2=2#test-test',
-            (string)$this->sut
+            (string) $this->sut
         );
     }
 
@@ -472,13 +471,13 @@ class UriTest extends TestCase
         );
 
         $expected = [
-            'scheme' => 'https',
-            'host' => 'test.test',
-            'port' => 80,
-            'user' => 'username',
-            'pass' => 'password',
-            'path' => '/en-us/path1/path2/page.html',
-            'query' => 'arg1=1&arg2=2',
+            'scheme'   => 'https',
+            'host'     => 'test.test',
+            'port'     => 80,
+            'user'     => 'username',
+            'pass'     => 'password',
+            'path'     => '/en-us/path1/path2/page.html',
+            'query'    => 'arg1=1&arg2=2',
             'fragment' => 'test-test',
         ];
 

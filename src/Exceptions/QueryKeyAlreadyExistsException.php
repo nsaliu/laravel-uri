@@ -13,8 +13,9 @@ class QueryKeyAlreadyExistsException extends \Exception
 
     /**
      * QueryKeyAlreadyExists constructor.
-     * @param string $key
-     * @param int $code
+     *
+     * @param string         $key
+     * @param int            $code
      * @param Throwable|null $previous
      */
     public function __construct(string $key, $code = 0, Throwable $previous = null)
