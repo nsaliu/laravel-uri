@@ -8,8 +8,10 @@ class CurlWrapper
 {
     /**
      * @param string $uri
-     * @return int
+     *
      * @throws CurlExtensionNotLoaded
+     *
+     * @return int
      */
     public function getReturnCode(string $uri): int
     {
@@ -26,6 +28,6 @@ class CurlWrapper
         $returnCode = \curl_getinfo($ch, CURLINFO_HTTP_CODE);
         \curl_close($ch);
 
-        return (int)$returnCode;
+        return (int) $returnCode;
     }
 }

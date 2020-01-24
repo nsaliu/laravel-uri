@@ -11,7 +11,7 @@ use Nsaliu\Uri\Exceptions\QueryKeyMustHaveAtLeastOneCharException;
 
 class Uri
 {
-    #region properties
+    //region properties
 
     /** @var string */
     private $scheme = '';
@@ -19,7 +19,7 @@ class Uri
     /** @var string */
     private $host = '';
 
-    /** @var  int|null */
+    /** @var int|null */
     private $port = null;
 
     /** @var string */
@@ -38,26 +38,27 @@ class Uri
     private $fragment = '';
 
     /**
-     * Taken from: https://github.com/guzzle/psr7/blob/master/src/Uri.php
+     * Taken from: https://github.com/guzzle/psr7/blob/master/src/Uri.php.
+     *
      * @var array
      */
     private const DEFAULT_PORTS = [
-        'http' => 80,
-        'https' => 443,
-        'ftp' => 21,
+        'http'   => 80,
+        'https'  => 443,
+        'ftp'    => 21,
         'gopher' => 70,
-        'nntp' => 119,
-        'news' => 119,
+        'nntp'   => 119,
+        'news'   => 119,
         'telnet' => 23,
         'tn3270' => 23,
-        'imap' => 143,
-        'pop' => 110,
-        'ldap' => 389,
+        'imap'   => 143,
+        'pop'    => 110,
+        'ldap'   => 389,
     ];
 
-    #endregion properties
+    //endregion properties
 
-    #region getters and setters
+    //region getters and setters
 
     /**
      * @return string
@@ -115,7 +116,7 @@ class Uri
         }
 
         if ($this->password !== '') {
-            $userInfo .= ':' . $this->password;
+            $userInfo .= ':'.$this->password;
         }
 
         return $userInfo;
@@ -155,7 +156,7 @@ class Uri
             $tmp .= '/';
         }
 
-        return $tmp . $this->path;
+        return $tmp.$this->path;
     }
 
     /**
@@ -189,6 +190,7 @@ class Uri
 
     /**
      * @param string $key
+     *
      * @return string|null
      */
     public function getQueryValue(string $key): ?string
@@ -218,9 +220,9 @@ class Uri
         }
 
         $query = $this->getQuery();
-        $query = $query === '' ? '' : '?' . $query;
+        $query = $query === '' ? '' : '?'.$query;
 
-        return $this->getPath() . $query;
+        return $this->getPath().$query;
     }
 
     /**
@@ -233,6 +235,7 @@ class Uri
 
     /**
      * @param string $scheme
+     *
      * @return $this
      */
     public function setScheme(string $scheme): self
@@ -244,6 +247,7 @@ class Uri
 
     /**
      * @param string $username
+     *
      * @return $this
      */
     public function setUsername(string $username): self
@@ -255,6 +259,7 @@ class Uri
 
     /**
      * @param string $password
+     *
      * @return $this
      */
     public function setPassword(string $password): self
@@ -265,8 +270,9 @@ class Uri
     }
 
     /**
-     * @param string $user
+     * @param string      $user
      * @param string|null $password
+     *
      * @return $this
      */
     public function setUserInfo(string $user, ?string $password = null): self
@@ -282,6 +288,7 @@ class Uri
 
     /**
      * @param string $host
+     *
      * @return $this
      */
     public function setHost(string $host): self
@@ -293,8 +300,10 @@ class Uri
 
     /**
      * @param int $port
-     * @return $this
+     *
      * @throws PortOutOfRangeException
+     *
+     * @return $this
      */
     public function setPort(int $port): self
     {
@@ -309,6 +318,7 @@ class Uri
 
     /**
      * @param string $path
+     *
      * @return $this
      */
     public function setPath(string $path): self
@@ -320,8 +330,10 @@ class Uri
 
     /**
      * @param string $query
-     * @return $this
+     *
      * @throws QueryCannotContainFragmentException
+     *
+     * @return $this
      */
     public function setQuery(string $query): self
     {
@@ -336,8 +348,10 @@ class Uri
 
     /**
      * @param array $query
-     * @return $this
+     *
      * @throws QueryCannotContainFragmentException
+     *
+     * @return $this
      */
     public function setQueryArray(array $query): self
     {
@@ -360,10 +374,12 @@ class Uri
     /**
      * @param string $key
      * @param string $value
-     * @return $this
+     *
      * @throws QueryCannotContainFragmentException
      * @throws QueryKeyMustHaveAtLeastOneCharException
      * @throws QueryKeyAlreadyExistsException
+     *
+     * @return $this
      */
     public function addQuery(string $key, string $value): self
     {
@@ -385,9 +401,11 @@ class Uri
     /**
      * @param string $key
      * @param string $value
-     * @return $this
+     *
      * @throws QueryCannotContainFragmentException
      * @throws QueryKeyMustHaveAtLeastOneCharException
+     *
+     * @return $this
      */
     public function changeQuery(string $key, string $value): self
     {
@@ -402,6 +420,7 @@ class Uri
 
     /**
      * @param string $fragment
+     *
      * @return $this
      */
     public function setFragment(string $fragment): self
@@ -419,15 +438,17 @@ class Uri
         return $this->toString();
     }
 
-    #endregion getters and setters
+    //endregion getters and setters
 
-    #region public methods
+    //region public methods
 
     /**
      * @param string $uri
-     * @return Uri
+     *
      * @throws InvalidUriException
      * @throws QueryCannotContainFragmentException
+     *
+     * @return Uri
      */
     public function createFromString(string $uri): self
     {
@@ -460,15 +481,15 @@ class Uri
         $uri = '';
 
         if ($this->scheme !== '') {
-            $uri .= $this->scheme . ':';
+            $uri .= $this->scheme.':';
         }
 
         if ($this->getAuthority() !== '') {
-            $uri .= '//' . $this->getAuthority();
+            $uri .= '//'.$this->getAuthority();
         }
 
         if ($this->getAuthority() === '' && $this->host !== '') {
-            $uri .= '//' . $this->host;
+            $uri .= '//'.$this->host;
         }
 
         if ($this->path !== '') {
@@ -480,20 +501,21 @@ class Uri
         }
 
         if (count($this->queryArray) > 0) {
-            $uri .= '?' . $this->buildQueryString($this->queryArray);
+            $uri .= '?'.$this->buildQueryString($this->queryArray);
         }
 
         if ($this->fragment !== '') {
-            $uri .= '#' . $this->fragment;
+            $uri .= '#'.$this->fragment;
         }
 
         return $uri;
     }
 
     /**
-     * @return bool
      * @throws Exceptions\CurlExtensionNotLoaded
      * @throws HostIsEmptyException
+     *
+     * @return bool
      */
     public function hostIsReachable(): bool
     {
@@ -502,11 +524,13 @@ class Uri
         }
 
         $curlWrapper = new CurlWrapper();
+
         return $curlWrapper->getReturnCode($this->toString());
     }
 
     /**
      * @param string $url
+     *
      * @return bool
      */
     public function equals(string $url): bool
@@ -520,25 +544,25 @@ class Uri
     public function getComponents(): array
     {
         return [
-            'scheme' => $this->getScheme(),
-            'host' => $this->getHost(),
-            'port' => $this->getPort(),
-            'user' => $this->getUsername(),
-            'pass' => $this->getPassword(),
-            'path' => $this->getPath(),
-            'query' => $this->getQuery(),
+            'scheme'   => $this->getScheme(),
+            'host'     => $this->getHost(),
+            'port'     => $this->getPort(),
+            'user'     => $this->getUsername(),
+            'pass'     => $this->getPassword(),
+            'path'     => $this->getPath(),
+            'query'    => $this->getQuery(),
             'fragment' => $this->getFragment(),
         ];
-
     }
 
-    #endregion public methods
+    //endregion public methods
 
-    #region private methods
+    //region private methods
 
     /**
      * @param string $key
-     * @param array $array
+     * @param array  $array
+     *
      * @return string
      */
     private function getUriValue(string $key, array &$array): string
@@ -552,6 +576,7 @@ class Uri
 
     /**
      * @param array $uriComponents
+     *
      * @return int|null
      */
     private function getPortUriValue(array &$uriComponents): ?int
@@ -564,7 +589,7 @@ class Uri
             return null;
         }
 
-        if (!is_integer($uriComponents['port'])) {
+        if (!is_int($uriComponents['port'])) {
             return null;
         }
 
@@ -573,6 +598,7 @@ class Uri
 
     /**
      * @param bool $withPort
+     *
      * @return string
      */
     private function getAuthorityValue(bool $withPort = false): string
@@ -583,16 +609,16 @@ class Uri
 
         $authority = $this->username;
 
-        $authority .= ':' . $this->password;
+        $authority .= ':'.$this->password;
 
-        $authority .= '@' . $this->host;
+        $authority .= '@'.$this->host;
 
         if ($this->port !== null) {
             if ($withPort) {
-                $authority .= ':' . $this->port;
+                $authority .= ':'.$this->port;
             } else {
                 if (!$this->isDefaultPort()) {
-                    $authority .= ':' . $this->port;
+                    $authority .= ':'.$this->port;
                 }
             }
         }
@@ -602,6 +628,7 @@ class Uri
 
     /**
      * @param string $part
+     *
      * @return array|null
      */
     protected function splitQueryPart(string $part)
@@ -639,6 +666,7 @@ class Uri
 
     /**
      * @param array $queryArray
+     *
      * @return string
      */
     private function buildQueryString(array $queryArray): string
@@ -646,5 +674,5 @@ class Uri
         return http_build_query($queryArray, null, '&');
     }
 
-    #endregion private methods
+    //endregion private methods
 }
