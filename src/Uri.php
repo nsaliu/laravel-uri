@@ -425,11 +425,11 @@ class Uri
 
     /**
      * @param string $uri
-     * @return void
-     * @throws QueryCannotContainFragmentException
+     * @return Uri
      * @throws InvalidUriException
+     * @throws QueryCannotContainFragmentException
      */
-    public function createFromString(string $uri): void
+    public function createFromString(string $uri): self
     {
         $uriComponents = parse_url($uri);
 
@@ -448,6 +448,8 @@ class Uri
         $this->setQuery(
             $this->getUriValue('query', $uriComponents)
         );
+
+        return $this;
     }
 
     /**

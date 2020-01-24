@@ -1,10 +1,10 @@
 # Laravel URI package
 
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-![PHP from Packagist](https://img.shields.io/packagist/php-v/nsaliu/laravel-uri?label=php&style=flat-square)
-![GitHub repo size](https://img.shields.io/github/repo-size/nsaliu/laravel-uri?style=flat-square)
 
-A simple and useful URI package for Laravel framework.
+A simple and useful URI package for Laravel framework. 
+
+This package provides an object representation of a uniform resource identifier (URI), an easy access and manipulation to the parts of the URI.
 
 ## Installation
 
@@ -47,7 +47,7 @@ $uri->hostIsReachable();
 
 ### equals
 
-Check if a string equals to the URI instance. 
+Check if a string representation of the URI equals to the URI instance. 
 
 ```
 $uri = new Uri();
@@ -83,7 +83,7 @@ Return:
 
 ### getScheme
 
-Return the scheme part of the URI.
+Get the scheme part of the URI.
 
 ```
 $uri = new Uri();
@@ -91,11 +91,11 @@ $uri->createFromString('https://test.test');
 $uri->getScheme();
 ```
 
-Return the scheme part of URI: ```https```
+If a scheme is present return ```https``` otherwise an ```empty string```.
 
 ### getUsername
 
-Return the user part from the URI.
+Get the user part of the URI.
 
 ```
 $uri = new Uri();
@@ -103,11 +103,11 @@ $uri->createFromString('https://fakeuser:fakepass@test.test');
 $uri->getUsername();
 ```
 
-If a user is set returns ```fakeuser```, otherwise return an empty string.
+If a user is present returns ```fakeuser```, otherwise return an ```empty string```.
 
 ### getPassword
 
-Return the pass part from the URI.
+Get the pass part of the URI.
 
 ```
 $uri = new Uri();
@@ -115,23 +115,21 @@ $uri->createFromString('https://fakeuser:fakepass@test.test');
 $uri->getPassword();
 ```
 
-If a password is set return ```fakepass```, otherwise return an empty string.
+If a password is set return ```fakepass```, otherwise return an ```empty string```.
 
 ### getAuthority
 
-Return the authority part of the URI.
+Get the authority part of the URI.
 
 ```
 $uri = new Uri();
 $uri->createFromString('https://fakeuser:fakepass@test.test');
 $uri->getAuthority();
 ```
-
-If no authority information is present, this method return an ```empty string```.
-
-If authority is set return it in form of: ```jhon:doe@test.com```. 
-
-If the port is a standard port for scheme, the port is not included, otherwise yes. 
+Return:
+- if no authority information is present, this method return an ```empty string```.
+- if authority is set return it in form of: ```jhon:doe@test.com```. 
+- if the port is a standard port for scheme, the port is not included, otherwise yes. 
 
 Example:
 
@@ -142,11 +140,11 @@ $uri->createFromString('https://fakeuser:fakepass@test.test');
 $uri->getAuthority();
 ```
 
-Results in: ```jhon:doe@test.com:80```
+Return ```jhon:doe@test.com:80```
 
 ### getAuthorityWithPort
 
-Return the authority part of the URI with the port too, even if it's the default.
+Get the authority part of the URI with the port too, even if it's the default for the scheme.
 
 ```
 $uri = new Uri();
@@ -154,11 +152,11 @@ $uri->createFromString('https://fakeuser:fakepass@test.test:443');
 $uri->getAuthorityWithPort();
 ```
 
-Return: ```jhon:doe@test.com:443```
+Return ```jhon:doe@test.com:443```
 
 ### getUserInfo
 
-Return the user part of the URI.
+Get the user part of the URI.
 
 ```
 $uri = new Uri();
@@ -167,29 +165,29 @@ $uri->getUserInfo();
 ```
 
 Return:
-- if no user information is present return an empty string.
-- if a user is present in the URI returns that value: ```fakeuser```
-- if a password is present it returns the password too separated by ':' from the username: ```fakeuser:fakepass```
+- if no user information is present return an ```empty string```.
+- if a user is present in the URI return ```fakeuser```.
+- if a password is present it returns the password too separated by ':' from the username ```fakeuser:fakepass```
 
 ### getHost
 
-Return the host part of the URI.
+Get the host part of the URI.
+
+```
+$uri = new Uri();
+$uri->createFromString('https://test.test');
+$uri->getHost();
+```
+
+Return ```test.test```
+
+### getPort
+
+Get the port part of the URI.
 
 ```
 $uri = new Uri();
 $uri->createFromString('https://test.test:443');
-$uri->getHost();
-```
-
-Results in: ```test.test```
-
-### getPort
-
-Return the port part of the URI.
-
-```
-$uri = new Uri();
-$uri->createFromString('https://fakeuser:fakepass@test.test:443');
 $uri->getPort();
 ```
 Return:
@@ -198,18 +196,18 @@ Return:
 
 ### isDefaultPort
 
-Get whether the port value of the URI is the default for given scheme.
+Get whether the port value of the URI is the default for the scheme.
 
 ```
 $uri = new Uri();
-$uri->createFromString('https://fakeuser:fakepass@test.test:80');
+$uri->createFromString('https://test.test:80');
 $uri->isDefaultPort();
 
 // return false because 80 isn't the default port for https scheme 
 ```
 
 Return:
-- ```true``` if the port is default for this scheme.
+- ```true``` if the port is default for the scheme.
 - ```false``` if the port isn't the default.
 
 ### getPath
@@ -258,12 +256,12 @@ $uri->getQuery();
 ```
 
 Return:
-- if the query part of the URI is present: ```key1=value1&key2=value2```.
+- if the query part of the URI is present return ```key1=value1&key2=value2```.
 - if the query part of the URI is not present return an ```empty string```.
 
 ### getQueryValue
 
-Get the query value given a query key.
+Get the value of a given query key. 
 
 ```
 $uri = new Uri();
@@ -272,12 +270,12 @@ $uri->getQueryValue('key1');
 ```
 
 Return:
-- if the key exists in query part return: ```value1```.
+- if the key exists in query return: ```value1```.
 - if the key not exists in query part return an ```empty string```.
 
 ### getQueryAsArray
 
-Get the query part as an array.
+Get the query part of the URI as an array.
 
 ```
 $uri = new Uri();
@@ -286,7 +284,7 @@ $uri->getQueryAsArray();
 ```
 
 Return:
-- if the query part exists return:
+- if the query part is present return:
 ```
 [
     'key1' => 'value1',
@@ -316,7 +314,7 @@ Get the fragment part of the URI.
 
 ```
 $uri = new Uri();
-$uri->createFromString('https://test.test/path1/path2/page.html?key1=value1&key2=value2#fragment-1');
+$uri->createFromString('https://test.test/page.html?key1=value1&key2=value2#fragment-1');
 $uri->getFragment();
 ```
 
@@ -328,11 +326,11 @@ Return:
 
 ### setScheme
 
-Set the scheme of the URI.
+Set the scheme part of the URI.
 
 ```
 $uri = new Uri();
-$uri->setScheme();
+$uri->setScheme('http');
 ```
 ### setUsername
 
@@ -340,7 +338,7 @@ Set the user part of the URI.
 
 ```
 $uri = new Uri();
-$uri->setUsername();
+$uri->setUsername('username');
 ```
 ### setPassword
 
@@ -348,7 +346,7 @@ Set the password part of the URI.
 
 ```
 $uri = new Uri();
-$uri->setPassword();
+$uri->setPassword('password');
 ```
 
 ### setUserInfo
@@ -405,7 +403,7 @@ $uri->setQueryArray(['key1' => 'value1', 'key2' => 'value2']);
 
 ### addQuery
 
-Add a query part to the URI.
+Add a query key and value to the URI.
 
 ```
 $uri = new Uri();
@@ -418,7 +416,7 @@ Change a query part of the URI.
 
 ```
 $uri = new Uri();
-$uri->changeQuery('key1', 'value-changed');
+$uri->changeQuery('key1', 'new-value');
 ```
 
 ### setFragment

@@ -376,6 +376,13 @@ class UriTest extends TestCase
         );
     }
 
+    public function testCreateFromStringMustReturnUriInstance()
+    {
+        $this->expectException(InvalidUriException::class);
+
+        $this->assertSame($this->sut, $this->sut->createFromString('https://test:test:test'));
+    }
+
     public function testCreateFromSetters()
     {
         $this->sut
