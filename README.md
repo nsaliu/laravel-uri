@@ -1,6 +1,7 @@
 # Laravel URI package
 
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+![CircleCI](https://img.shields.io/circleci/build/github/nsaliu/laravel-uri/master?style=flat-square)
 
 A simple and useful URI package for Laravel framework. 
 
