@@ -17,7 +17,7 @@ class UriServiceProvider extends ServiceProvider
             return new \Nsaliu\Uri\Uri();
         });
 
-        $this->app->alias(\Nsaliu\Uri\Uri::class, 'URI');
+        $this->app->alias(\Nsaliu\Uri\Uri::class, 'URIHelper');
     }
 
     /**
