@@ -1,6 +1,6 @@
 # Laravel URI package
 
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 A simple and useful URI package for Laravel framework. 
 

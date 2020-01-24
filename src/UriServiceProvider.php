@@ -4,7 +4,7 @@ namespace Nsaliu\Uri;
 
 use Illuminate\Support\ServiceProvider;
 
-class UriComponentServiceProvider extends ServiceProvider
+class UriServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -13,7 +13,11 @@ class UriComponentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(\Nsaliu\Uri\Uri::class, function () {
+            return new \Nsaliu\Uri\Uri();
+        });
+
+        $this->app->alias(\Nsaliu\Uri\Uri::class, 'URI');
     }
 
     /**
@@ -23,6 +27,6 @@ class UriComponentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
     }
 }

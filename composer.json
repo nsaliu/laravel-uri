@@ -29,8 +29,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Nsaliu\\Uri\\UriComponentServiceProvider"
-            ]
+                "Nsaliu\\Uri\\UriServiceProvider"
+            ],
+            "aliases": {
+                "URI": "Nsaliu\\Uri\\UriFacade"
+            }
         }
     },
     "minimum-stability": "dev",
